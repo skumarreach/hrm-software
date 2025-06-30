@@ -8,12 +8,32 @@ export default defineConfig({
     exclude: ['lucide-react'],
   },
   server: {
-    historyApiFallback: true,
-    host: true,
+    host: '0.0.0.0',
     port: 5173,
+    strictPort: true,
+    historyApiFallback: {
+      index: '/index.html',
+      rewrites: [
+        { from: /^\/(?!api).*$/, to: '/index.html' }
+      ]
+    }
   },
   preview: {
-    host: true,
+    host: '0.0.0.0',
     port: 4173,
+    strictPort: true,
+    historyApiFallback: {
+      index: '/index.html',
+      rewrites: [
+        { from: /^\/(?!api).*$/, to: '/index.html' }
+      ]
+    }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
   },
 });
