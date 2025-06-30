@@ -6,6 +6,13 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
+  const handleMenuClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('Header menu button clicked'); // Debug log
+    onMenuClick();
+  };
+
   return (
     <header className="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-200">
       <div className="px-4 sm:px-6 lg:px-8">
@@ -15,8 +22,9 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
             {/* Mobile/Tablet menu button - Always visible on non-desktop */}
             <button
               type="button"
-              className="xl:hidden p-3 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gradient-to-r hover:from-scarlet-50 hover:to-azure-50 transition-all duration-200 touch-manipulation"
-              onClick={onMenuClick}
+              onClick={handleMenuClick}
+              className="xl:hidden p-3 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gradient-to-r hover:from-scarlet-50 hover:to-azure-50 transition-all duration-200 touch-manipulation active:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-scarlet-500"
+              aria-label="Open menu"
             >
               <Menu className="h-6 w-6" />
             </button>

@@ -52,26 +52,36 @@ const Sidebar: React.FC<SidebarProps> = ({ mobile = false, open = false, onClose
   }, [mobile, open]);
 
   if (mobile) {
+    console.log('Mobile sidebar render - open:', open); // Debug log
+    
     return (
       <>
         {/* Backdrop */}
         {open && (
           <div 
             className="fixed inset-0 z-40 bg-gray-900 bg-opacity-50 transition-opacity xl:hidden" 
-            onClick={onClose} 
+            onClick={onClose}
+            style={{ touchAction: 'none' }} // Prevent scroll on backdrop
           />
         )}
         
         {/* Mobile Sidebar */}
-        <div className={`fixed inset-y-0 left-0 z-50 w-80 max-w-sm bg-white transform transition-transform duration-300 ease-in-out xl:hidden shadow-2xl ${
-          open ? 'translate-x-0' : '-translate-x-full'
-        }`}>
+        <div 
+          className={`fixed inset-y-0 left-0 z-50 w-80 max-w-sm bg-white transform transition-transform duration-300 ease-in-out xl:hidden shadow-2xl ${
+            open ? 'translate-x-0' : '-translate-x-full'
+          }`}
+          style={{ 
+            willChange: 'transform',
+            backfaceVisibility: 'hidden'
+          }}
+        >
           {/* Close button */}
           <div className="absolute top-4 right-4 z-10">
             <button
               type="button"
-              className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-scarlet-500 touch-manipulation"
               onClick={onClose}
+              className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-scarlet-500 touch-manipulation active:bg-gray-300"
+              aria-label="Close menu"
             >
               <X className="h-5 w-5" />
             </button>
@@ -92,6 +102,15 @@ const Sidebar: React.FC<SidebarProps> = ({ mobile = false, open = false, onClose
 };
 
 const SidebarContent: React.FC<{ location: any; onClose?: () => void }> = ({ location, onClose }) => {
+  const handleLinkClick = (e: React.MouseEvent) => {
+    // Small delay to allow for visual feedback before closing
+    setTimeout(() => {
+      if (onClose) {
+        onClose();
+      }
+    }, 100);
+  };
+
   return (
     <div className="flex flex-col h-full">
       {/* Logo */}
@@ -117,7 +136,7 @@ const SidebarContent: React.FC<{ location: any; onClose?: () => void }> = ({ loc
             <Link
               key={item.name}
               to={item.href}
-              onClick={onClose}
+              onClick={handleLinkClick}
               className={`flex items-center px-4 py-4 text-sm font-medium rounded-lg transition-all duration-200 touch-manipulation ${
                 isActive
                   ? 'bg-gradient-scarlet text-white shadow-lg'
