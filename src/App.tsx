@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Employees from './pages/Employees/Employees';
@@ -14,12 +14,15 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Navigate to="/" replace />} />
         <Route path="/employees" element={<Employees />} />
         <Route path="/time-tracking" element={<TimeTracking />} />
         <Route path="/leave" element={<Leave />} />
         <Route path="/payroll" element={<Payroll />} />
         <Route path="/performance" element={<Performance />} />
         <Route path="/settings" element={<Settings />} />
+        {/* Catch-all route for 404s - redirect to dashboard */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Layout>
   );
