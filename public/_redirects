@@ -1,14 +1,1 @@
-# Netlify redirects for SPA
 /*    /index.html   200
-
-# Specific routes
-/dashboard    /index.html   200
-/employees    /index.html   200
-/time-tracking    /index.html   200
-/leave    /index.html   200
-/payroll    /index.html   200
-/performance    /index.html   200
-/settings    /index.html   200
-
-# API routes (if any in future)
-/api/*  /api/:splat  200
