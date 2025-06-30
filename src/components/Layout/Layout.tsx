@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import Sidebar from './Sidebar';
-import MobileNavigation from './MobileNavigation';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -32,15 +31,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <Header onMenuClick={() => setSidebarOpen(true)} />
 
         {/* Main Content */}
-        <main className="py-4 px-4 sm:py-6 sm:px-6 lg:px-8 pb-20 xl:pb-6">
+        <main className="py-4 px-4 sm:py-6 sm:px-6 lg:px-8 pb-6">
           <div className="animate-fade-in max-w-7xl mx-auto">
             {children}
           </div>
         </main>
       </div>
-
-      {/* Mobile Bottom Navigation - Only show on mobile/tablet */}
-      <MobileNavigation currentPath={location.pathname} />
     </div>
   );
 };

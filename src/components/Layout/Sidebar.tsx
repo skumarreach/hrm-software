@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, 
@@ -31,29 +31,49 @@ const navigation = [
 const Sidebar: React.FC<SidebarProps> = ({ mobile = false, open = false, onClose }) => {
   const location = useLocation();
 
+  // Close sidebar when route changes on mobile
+  useEffect(() => {
+    if (mobile && open && onClose) {
+      onClose();
+    }
+  }, [location.pathname, mobile, open, onClose]);
+
+  // Prevent body scroll when mobile sidebar is open
+  useEffect(() => {
+    if (mobile && open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobile, open]);
+
   if (mobile) {
     return (
       <>
         {/* Backdrop */}
         {open && (
           <div 
-            className="fixed inset-0 z-40 bg-gray-600 bg-opacity-75 transition-opacity xl:hidden" 
+            className="fixed inset-0 z-40 bg-gray-900 bg-opacity-50 transition-opacity xl:hidden" 
             onClick={onClose} 
           />
         )}
         
         {/* Mobile Sidebar */}
-        <div className={`fixed inset-y-0 left-0 z-50 w-80 bg-white transform transition-transform duration-300 ease-in-out xl:hidden ${
+        <div className={`fixed inset-y-0 left-0 z-50 w-80 max-w-sm bg-white transform transition-transform duration-300 ease-in-out xl:hidden shadow-2xl ${
           open ? 'translate-x-0' : '-translate-x-full'
         }`}>
           {/* Close button */}
-          <div className="absolute top-0 right-0 -mr-12 pt-2">
+          <div className="absolute top-4 right-4 z-10">
             <button
               type="button"
-              className="ml-1 flex h-12 w-12 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white touch-manipulation"
+              className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-scarlet-500 touch-manipulation"
               onClick={onClose}
             >
-              <X className="h-6 w-6 text-white" />
+              <X className="h-5 w-5" />
             </button>
           </div>
           

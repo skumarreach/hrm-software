@@ -12,10 +12,10 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
         <div className="flex h-14 sm:h-16 items-center justify-between">
           {/* Left side - Mobile menu + Search */}
           <div className="flex items-center flex-1">
-            {/* Mobile/Tablet menu button */}
+            {/* Mobile/Tablet menu button - Always visible on non-desktop */}
             <button
               type="button"
-              className="xl:hidden -ml-2 p-3 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gradient-to-r hover:from-scarlet-50 hover:to-azure-50 transition-all duration-200 touch-manipulation"
+              className="xl:hidden p-3 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gradient-to-r hover:from-scarlet-50 hover:to-azure-50 transition-all duration-200 touch-manipulation"
               onClick={onMenuClick}
             >
               <Menu className="h-6 w-6" />
