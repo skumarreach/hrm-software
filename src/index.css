@@ -9,6 +9,7 @@
   input[type="submit"], 
   input[type="button"] {
     @apply touch-manipulation;
+    min-height: 44px; /* iOS recommended minimum touch target */
   }
 
   /* Improve text readability on mobile */
@@ -53,6 +54,16 @@
 
   ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, #dc2626, #2563eb);
+  }
+
+  /* Prevent horizontal scroll on mobile */
+  html, body {
+    overflow-x: hidden;
+  }
+
+  /* Better tap highlighting */
+  * {
+    -webkit-tap-highlight-color: rgba(239, 68, 68, 0.1);
   }
 }
 
@@ -146,4 +157,32 @@
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 640px) {
+  /* Ensure proper spacing on mobile */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Better button sizing on mobile */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve form inputs on mobile */
+  input, select, textarea {
+    min-height: 44px;
+  }
+}
+
+/* Tablet-specific optimizations */
+@media (min-width: 641px) and (max-width: 1279px) {
+  /* Tablet-specific styles */
+  .tablet-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
 }

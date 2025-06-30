@@ -14,31 +14,32 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Desktop Sidebar */}
-      <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+      {/* Desktop Sidebar - Hidden on mobile/tablet */}
+      <div className="hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
         <Sidebar />
       </div>
 
-      {/* Mobile Sidebar */}
+      {/* Mobile/Tablet Sidebar Overlay */}
       <Sidebar 
         mobile 
         open={sidebarOpen} 
         onClose={() => setSidebarOpen(false)} 
       />
 
-      <div className="lg:pl-72">
+      {/* Main Content Area */}
+      <div className="xl:pl-72">
         {/* Header */}
         <Header onMenuClick={() => setSidebarOpen(true)} />
 
         {/* Main Content */}
-        <main className="py-4 px-4 sm:py-6 sm:px-6 lg:px-8 pb-20 lg:pb-6">
-          <div className="animate-fade-in">
+        <main className="py-4 px-4 sm:py-6 sm:px-6 lg:px-8 pb-20 xl:pb-6">
+          <div className="animate-fade-in max-w-7xl mx-auto">
             {children}
           </div>
         </main>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Bottom Navigation - Only show on mobile/tablet */}
       <MobileNavigation currentPath={location.pathname} />
     </div>
   );

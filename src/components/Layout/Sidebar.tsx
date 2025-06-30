@@ -31,37 +31,43 @@ const navigation = [
 const Sidebar: React.FC<SidebarProps> = ({ mobile = false, open = false, onClose }) => {
   const location = useLocation();
 
-  const sidebarClasses = mobile
-    ? `fixed inset-0 z-50 lg:hidden ${open ? 'block' : 'hidden'}`
-    : 'flex flex-col bg-white border-r border-gray-200 h-full';
-
-  return (
-    <>
-      {mobile && open && (
-        <div className="fixed inset-0 z-40 bg-gray-600 bg-opacity-75 transition-opacity" onClick={onClose} />
-      )}
-      
-      <div className={sidebarClasses}>
-        {mobile && (
-          <div className="fixed inset-0 z-50 flex">
-            <div className="relative flex w-full max-w-xs flex-1 flex-col bg-white">
-              <div className="absolute top-0 right-0 -mr-12 pt-2">
-                <button
-                  type="button"
-                  className="ml-1 flex h-12 w-12 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white touch-manipulation"
-                  onClick={onClose}
-                >
-                  <X className="h-6 w-6 text-white" />
-                </button>
-              </div>
-              <SidebarContent location={location} onClose={onClose} />
-            </div>
-          </div>
+  if (mobile) {
+    return (
+      <>
+        {/* Backdrop */}
+        {open && (
+          <div 
+            className="fixed inset-0 z-40 bg-gray-600 bg-opacity-75 transition-opacity xl:hidden" 
+            onClick={onClose} 
+          />
         )}
         
-        {!mobile && <SidebarContent location={location} />}
-      </div>
-    </>
+        {/* Mobile Sidebar */}
+        <div className={`fixed inset-y-0 left-0 z-50 w-80 bg-white transform transition-transform duration-300 ease-in-out xl:hidden ${
+          open ? 'translate-x-0' : '-translate-x-full'
+        }`}>
+          {/* Close button */}
+          <div className="absolute top-0 right-0 -mr-12 pt-2">
+            <button
+              type="button"
+              className="ml-1 flex h-12 w-12 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white touch-manipulation"
+              onClick={onClose}
+            >
+              <X className="h-6 w-6 text-white" />
+            </button>
+          </div>
+          
+          <SidebarContent location={location} onClose={onClose} />
+        </div>
+      </>
+    );
+  }
+
+  // Desktop sidebar
+  return (
+    <div className="flex flex-col bg-white border-r border-gray-200 h-full">
+      <SidebarContent location={location} />
+    </div>
   );
 };
 
@@ -92,14 +98,14 @@ const SidebarContent: React.FC<{ location: any; onClose?: () => void }> = ({ loc
               key={item.name}
               to={item.href}
               onClick={onClose}
-              className={`flex items-center px-3 py-3 text-sm font-medium rounded-lg transition-all duration-200 touch-manipulation ${
+              className={`flex items-center px-4 py-4 text-sm font-medium rounded-lg transition-all duration-200 touch-manipulation ${
                 isActive
                   ? 'bg-gradient-scarlet text-white shadow-lg'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gradient-to-r hover:from-scarlet-50 hover:to-azure-50 active:bg-gray-100'
               }`}
             >
               <Icon className={`mr-3 h-5 w-5 ${isActive ? 'text-white' : 'text-gray-400'}`} />
-              {item.name}
+              <span className="truncate">{item.name}</span>
             </Link>
           );
         })}
@@ -108,7 +114,7 @@ const SidebarContent: React.FC<{ location: any; onClose?: () => void }> = ({ loc
       {/* Footer */}
       <div className="p-4 border-t border-gray-200">
         <div className="flex items-center space-x-3 p-3 bg-gradient-to-r from-emerald-50 to-golden-50 rounded-lg touch-manipulation">
-          <div className="h-10 w-10 bg-gradient-scarlet rounded-full flex items-center justify-center shadow-md">
+          <div className="h-10 w-10 bg-gradient-scarlet rounded-full flex items-center justify-center shadow-md flex-shrink-0">
             <span className="text-sm font-semibold text-white">SJ</span>
           </div>
           <div className="flex-1 min-w-0">

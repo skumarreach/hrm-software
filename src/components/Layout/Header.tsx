@@ -10,18 +10,19 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
     <header className="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-200">
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex h-14 sm:h-16 items-center justify-between">
-          {/* Mobile menu button */}
-          <div className="flex items-center">
+          {/* Left side - Mobile menu + Search */}
+          <div className="flex items-center flex-1">
+            {/* Mobile/Tablet menu button */}
             <button
               type="button"
-              className="lg:hidden -ml-2 p-3 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gradient-to-r hover:from-scarlet-50 hover:to-azure-50 transition-all duration-200 touch-manipulation"
+              className="xl:hidden -ml-2 p-3 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gradient-to-r hover:from-scarlet-50 hover:to-azure-50 transition-all duration-200 touch-manipulation"
               onClick={onMenuClick}
             >
               <Menu className="h-6 w-6" />
             </button>
             
-            {/* Search bar - hidden on mobile, shown on tablet+ */}
-            <div className="hidden md:block ml-4 lg:ml-0">
+            {/* Search bar - hidden on small mobile, shown on larger screens */}
+            <div className="hidden sm:block ml-4 xl:ml-0 flex-1 max-w-md">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Search className="h-5 w-5 text-gray-400" />
@@ -36,9 +37,9 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
           </div>
 
           {/* Right side */}
-          <div className="flex items-center space-x-2 sm:space-x-4">
+          <div className="flex items-center space-x-2 sm:space-x-3">
             {/* Mobile search button */}
-            <button className="md:hidden p-3 text-gray-400 hover:text-gray-500 hover:bg-gradient-to-r hover:from-scarlet-50 hover:to-azure-50 rounded-lg transition-all duration-200 touch-manipulation">
+            <button className="sm:hidden p-3 text-gray-400 hover:text-gray-500 hover:bg-gradient-to-r hover:from-scarlet-50 hover:to-azure-50 rounded-lg transition-all duration-200 touch-manipulation">
               <Search className="h-5 w-5" />
             </button>
 
@@ -50,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
 
             {/* Profile */}
             <div className="flex items-center space-x-2 sm:space-x-3">
-              <div className="hidden sm:block text-right">
+              <div className="hidden md:block text-right">
                 <p className="text-sm font-medium text-gray-900">Sarah Johnson</p>
                 <p className="text-xs text-gray-500">HR Manager</p>
               </div>

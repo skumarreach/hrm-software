@@ -55,7 +55,7 @@ const QuickActions: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
         {actions.map((action) => {
           const Icon = action.icon;
           const gradientClasses = getGradientClasses(action.color);
@@ -65,11 +65,11 @@ const QuickActions: React.FC = () => {
               key={action.name}
               className="flex flex-col items-center p-4 sm:p-6 rounded-lg border-2 border-gray-100 hover:border-gray-200 transition-all duration-200 hover:shadow-lg group touch-manipulation"
             >
-              <div className={`p-2 sm:p-3 rounded-full ${gradientClasses} text-white mb-2 sm:mb-3 group-hover:scale-110 transition-all duration-200 shadow-lg`}>
+              <div className={`p-3 sm:p-4 rounded-full ${gradientClasses} text-white mb-3 group-hover:scale-110 transition-all duration-200 shadow-lg`}>
                 <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
-              <h3 className="font-medium text-gray-900 text-center text-sm sm:text-base">{action.name}</h3>
-              <p className="text-xs sm:text-sm text-gray-500 text-center mt-1 hidden sm:block">{action.description}</p>
+              <h3 className="font-medium text-gray-900 text-center text-sm sm:text-base leading-tight">{action.name}</h3>
+              <p className="text-xs sm:text-sm text-gray-500 text-center mt-1 hidden sm:block leading-tight">{action.description}</p>
             </button>
           );
         })}

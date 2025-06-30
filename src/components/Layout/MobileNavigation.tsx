@@ -22,8 +22,8 @@ const mobileNavigation = [
 
 const MobileNavigation: React.FC<MobileNavigationProps> = ({ currentPath }) => {
   return (
-    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 px-2 py-1 safe-area-pb shadow-lg">
-      <div className="flex items-center justify-around">
+    <div className="xl:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 px-2 py-2 safe-area-pb shadow-lg">
+      <div className="flex items-center justify-around max-w-md mx-auto">
         {mobileNavigation.map((item) => {
           const isActive = currentPath === item.href;
           const Icon = item.icon;
