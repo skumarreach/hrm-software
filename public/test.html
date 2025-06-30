@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Test - NextHR</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #ef4444, #3b82f6);
+            color: white;
+            text-align: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        .success {
+            color: #10b981;
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        .info {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        button {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            min-height: 44px;
+        }
+        button:hover {
+            background: #dc2626;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 Network Connection Test</h1>
+        <div class="success">✅ SUCCESS!</div>
+        <p>If you can see this page, your network connection is working!</p>
+        
+        <div class="info">
+            <h3>Connection Info:</h3>
+            <p><strong>URL:</strong> <span id="currentUrl"></span></p>
+            <p><strong>User Agent:</strong> <span id="userAgent"></span></p>
+            <p><strong>Screen Size:</strong> <span id="screenSize"></span></p>
+            <p><strong>Time:</strong> <span id="currentTime"></span></p>
+        </div>
+
+        <button onclick="goToApp()">Go to NextHR App</button>
+        <button onclick="testRoutes()">Test Routes</button>
+        
+        <div id="routeTests" style="margin-top: 20px;"></div>
+    </div>
+
+    <script>
+        // Display connection info
+        document.getElementById('currentUrl').textContent = window.location.href;
+        document.getElementById('userAgent').textContent = navigator.userAgent;
+        document.getElementById('screenSize').textContent = `${screen.width}x${screen.height}`;
+        document.getElementById('currentTime').textContent = new Date().toLocaleString();
+
+        function goToApp() {
+            window.location.href = '/';
+        }
+
+        function testRoutes() {
+            const routes = ['/', '/employees', '/time-tracking', '/leave', '/payroll', '/performance', '/settings'];
+            const testDiv = document.getElementById('routeTests');
+            testDiv.innerHTML = '<h3>Testing Routes...</h3>';
+            
+            routes.forEach(route => {
+                const link = document.createElement('a');
+                link.href = route;
+                link.textContent = route === '/' ? 'Dashboard' : route.replace('/', '').replace('-', ' ');
+                link.style.display = 'block';
+                link.style.margin = '10px 0';
+                link.style.padding = '10px';
+                link.style.background = 'rgba(255, 255, 255, 0.2)';
+                link.style.borderRadius = '5px';
+                link.style.textDecoration = 'none';
+                link.style.color = 'white';
+                testDiv.appendChild(link);
+            });
+        }
+    </script>
+</body>
+</html>
