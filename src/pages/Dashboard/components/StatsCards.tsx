@@ -48,7 +48,7 @@ const getColorClasses = (color: string) => {
 
 const StatsCards: React.FC = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
       {stats.map((stat) => {
         const Icon = stat.icon;
         const iconColorClasses = getColorClasses(stat.color);
@@ -56,12 +56,12 @@ const StatsCards: React.FC = () => {
         return (
           <div
             key={stat.name}
-            className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200"
+            className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 hover:shadow-md transition-shadow duration-200 touch-manipulation"
           >
             <div className="flex items-center justify-between">
-              <div className="flex-1">
-                <p className="text-sm font-medium text-gray-500">{stat.name}</p>
-                <p className="text-2xl font-bold text-gray-900 mt-1">{stat.value}</p>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs sm:text-sm font-medium text-gray-500 truncate">{stat.name}</p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-900 mt-1">{stat.value}</p>
                 <div className="flex items-center mt-2">
                   <span
                     className={`text-xs font-medium px-2 py-1 rounded-full ${
@@ -72,11 +72,11 @@ const StatsCards: React.FC = () => {
                   >
                     {stat.change}
                   </span>
-                  <span className="text-xs text-gray-500 ml-2">vs last month</span>
+                  <span className="text-xs text-gray-500 ml-2 hidden sm:inline">vs last month</span>
                 </div>
               </div>
-              <div className={`p-3 rounded-lg ${iconColorClasses}`}>
-                <Icon className="h-6 w-6" />
+              <div className={`p-2 sm:p-3 rounded-lg ${iconColorClasses} ml-2`}>
+                <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
             </div>
           </div>

@@ -105,7 +105,7 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ searchTerm }) => {
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-      <div className="px-6 py-4 border-b border-gray-200">
+      <div className="px-4 sm:px-6 py-4 border-b border-gray-200">
         <h2 className="text-lg font-semibold text-gray-900">
           Employee Directory ({filteredEmployees.length})
         </h2>
@@ -113,59 +113,62 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ searchTerm }) => {
 
       <div className="divide-y divide-gray-200">
         {filteredEmployees.map((employee) => (
-          <div key={employee.id} className="p-6 hover:bg-gray-50 transition-colors duration-200">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                {/* Avatar */}
-                <div className="h-12 w-12 bg-primary-500 rounded-full flex items-center justify-center">
-                  <span className="text-white font-semibold">{employee.avatar}</span>
-                </div>
-
-                {/* Employee Info */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center space-x-3 mb-1">
-                    <h3 className="text-lg font-semibold text-gray-900">{employee.name}</h3>
-                    <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(employee.status)}`}>
-                      {employee.status}
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-600">{employee.role} • {employee.department}</p>
-                  
-                  <div className="flex items-center space-x-4 mt-2 text-sm text-gray-500">
-                    <div className="flex items-center">
-                      <Mail className="h-4 w-4 mr-1" />
-                      {employee.email}
-                    </div>
-                    <div className="flex items-center">
-                      <Phone className="h-4 w-4 mr-1" />
-                      {employee.phone}
-                    </div>
-                    <div className="flex items-center">
-                      <MapPin className="h-4 w-4 mr-1" />
-                      {employee.location}
-                    </div>
-                  </div>
-
-                  <div className="flex items-center space-x-4 mt-2">
-                    <div className="flex items-center">
-                      <Star className="h-4 w-4 text-yellow-400 mr-1" />
-                      <span className="text-sm text-gray-600">{employee.rating}</span>
-                    </div>
-                    <span className="text-sm text-gray-500">
-                      Joined {new Date(employee.joinDate).toLocaleDateString()}
-                    </span>
-                  </div>
-                </div>
+          <div key={employee.id} className="p-4 sm:p-6 hover:bg-gray-50 transition-colors duration-200 touch-manipulation">
+            <div className="flex items-start space-x-4">
+              {/* Avatar */}
+              <div className="h-12 w-12 bg-primary-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-white font-semibold">{employee.avatar}</span>
               </div>
 
-              {/* Actions */}
-              <div className="flex items-center space-x-2">
-                <button className="px-4 py-2 text-sm font-medium text-primary-600 bg-primary-50 rounded-lg hover:bg-primary-100 transition-colors duration-200">
-                  View Profile
-                </button>
-                <button className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                  <MoreHorizontal className="h-5 w-5" />
-                </button>
+              {/* Employee Info */}
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-3 mb-2">
+                      <h3 className="text-lg font-semibold text-gray-900 truncate">{employee.name}</h3>
+                      <span className={`px-2 py-1 text-xs font-medium rounded-full self-start ${getStatusColor(employee.status)}`}>
+                        {employee.status}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-600 mb-3">{employee.role} • {employee.department}</p>
+                    
+                    {/* Contact Info - Stacked on mobile */}
+                    <div className="space-y-2 sm:space-y-1">
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Mail className="h-4 w-4 mr-2 flex-shrink-0" />
+                        <span className="truncate">{employee.email}</span>
+                      </div>
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Phone className="h-4 w-4 mr-2 flex-shrink-0" />
+                        <span>{employee.phone}</span>
+                      </div>
+                      <div className="flex items-center text-sm text-gray-500">
+                        <MapPin className="h-4 w-4 mr-2 flex-shrink-0" />
+                        <span>{employee.location}</span>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 mt-3 space-y-2 sm:space-y-0">
+                      <div className="flex items-center">
+                        <Star className="h-4 w-4 text-yellow-400 mr-1" />
+                        <span className="text-sm text-gray-600">{employee.rating}</span>
+                      </div>
+                      <span className="text-sm text-gray-500">
+                        Joined {new Date(employee.joinDate).toLocaleDateString()}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex items-center space-x-2 mt-4 sm:mt-0 sm:ml-4">
+                    <button className="flex-1 sm:flex-none px-4 py-2 text-sm font-medium text-primary-600 bg-primary-50 rounded-lg hover:bg-primary-100 transition-colors duration-200 touch-manipulation">
+                      View Profile
+                    </button>
+                    <button className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors duration-200 touch-manipulation">
+                      <MoreHorizontal className="h-5 w-5" />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

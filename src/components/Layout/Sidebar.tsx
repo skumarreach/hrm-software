@@ -38,7 +38,7 @@ const Sidebar: React.FC<SidebarProps> = ({ mobile = false, open = false, onClose
   return (
     <>
       {mobile && open && (
-        <div className="fixed inset-0 z-40 bg-gray-600 bg-opacity-75" onClick={onClose} />
+        <div className="fixed inset-0 z-40 bg-gray-600 bg-opacity-75 transition-opacity" onClick={onClose} />
       )}
       
       <div className={sidebarClasses}>
@@ -48,7 +48,7 @@ const Sidebar: React.FC<SidebarProps> = ({ mobile = false, open = false, onClose
               <div className="absolute top-0 right-0 -mr-12 pt-2">
                 <button
                   type="button"
-                  className="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                  className="ml-1 flex h-12 w-12 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white touch-manipulation"
                   onClick={onClose}
                 >
                   <X className="h-6 w-6 text-white" />
@@ -82,7 +82,7 @@ const SidebarContent: React.FC<{ location: any; onClose?: () => void }> = ({ loc
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-4 py-6 space-y-2">
+      <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
         {navigation.map((item) => {
           const isActive = location.pathname === item.href;
           const Icon = item.icon;
@@ -92,10 +92,10 @@ const SidebarContent: React.FC<{ location: any; onClose?: () => void }> = ({ loc
               key={item.name}
               to={item.href}
               onClick={onClose}
-              className={`flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 ${
+              className={`flex items-center px-3 py-3 text-sm font-medium rounded-lg transition-all duration-200 touch-manipulation ${
                 isActive
                   ? 'bg-primary-50 text-primary-700 border-r-2 border-primary-600'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50 active:bg-gray-100'
               }`}
             >
               <Icon className={`mr-3 h-5 w-5 ${isActive ? 'text-primary-600' : 'text-gray-400'}`} />
@@ -107,7 +107,7 @@ const SidebarContent: React.FC<{ location: any; onClose?: () => void }> = ({ loc
 
       {/* Footer */}
       <div className="p-4 border-t border-gray-200">
-        <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+        <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg touch-manipulation">
           <div className="h-10 w-10 bg-primary-500 rounded-full flex items-center justify-center">
             <span className="text-sm font-semibold text-white">SJ</span>
           </div>

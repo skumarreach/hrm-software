@@ -31,7 +31,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <Header onMenuClick={() => setSidebarOpen(true)} />
 
         {/* Main Content */}
-        <main className="py-6 px-4 sm:px-6 lg:px-8 pb-20 lg:pb-6">
+        <main className="py-4 px-4 sm:py-6 sm:px-6 lg:px-8 pb-20 lg:pb-6">
           <div className="animate-fade-in">
             {children}
           </div>

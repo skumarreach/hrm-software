@@ -22,7 +22,7 @@ const mobileNavigation = [
 
 const MobileNavigation: React.FC<MobileNavigationProps> = ({ currentPath }) => {
   return (
-    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 px-4 py-2">
+    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 px-2 py-1 safe-area-pb">
       <div className="flex items-center justify-around">
         {mobileNavigation.map((item) => {
           const isActive = currentPath === item.href;
@@ -32,14 +32,14 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({ currentPath }) => {
             <Link
               key={item.name}
               to={item.href}
-              className={`flex flex-col items-center space-y-1 p-2 rounded-lg transition-colors duration-200 ${
+              className={`flex flex-col items-center space-y-1 p-3 rounded-xl transition-all duration-200 touch-manipulation min-w-0 flex-1 ${
                 isActive
-                  ? 'text-primary-600'
-                  : 'text-gray-400 hover:text-gray-600'
+                  ? 'text-primary-600 bg-primary-50'
+                  : 'text-gray-400 hover:text-gray-600 active:bg-gray-100'
               }`}
             >
-              <Icon className="h-5 w-5" />
-              <span className="text-xs font-medium">{item.name}</span>
+              <Icon className="h-5 w-5 flex-shrink-0" />
+              <span className="text-xs font-medium truncate">{item.name}</span>
             </Link>
           );
         })}
