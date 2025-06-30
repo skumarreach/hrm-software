@@ -8,7 +8,7 @@ const stats = [
     change: '+12%',
     changeType: 'positive',
     icon: Users,
-    color: 'primary',
+    color: 'scarlet',
   },
   {
     name: 'Hours This Week',
@@ -16,7 +16,7 @@ const stats = [
     change: '+3.2%',
     changeType: 'positive',
     icon: Clock,
-    color: 'secondary',
+    color: 'azure',
   },
   {
     name: 'Pending Requests',
@@ -24,7 +24,7 @@ const stats = [
     change: '-5%',
     changeType: 'negative',
     icon: Calendar,
-    color: 'warning',
+    color: 'golden',
   },
   {
     name: 'Performance Score',
@@ -32,18 +32,28 @@ const stats = [
     change: '+2.1%',
     changeType: 'positive',
     icon: TrendingUp,
-    color: 'success',
+    color: 'emerald',
   },
 ];
 
 const getColorClasses = (color: string) => {
   const colorMap = {
-    primary: 'bg-primary-50 text-primary-600',
-    secondary: 'bg-secondary-50 text-secondary-600',
-    warning: 'bg-warning-50 text-warning-600',
-    success: 'bg-success-50 text-success-600',
+    scarlet: 'bg-scarlet-50 text-scarlet-600',
+    azure: 'bg-azure-50 text-azure-600',
+    golden: 'bg-golden-50 text-golden-600',
+    emerald: 'bg-emerald-50 text-emerald-600',
   };
-  return colorMap[color as keyof typeof colorMap] || colorMap.primary;
+  return colorMap[color as keyof typeof colorMap] || colorMap.scarlet;
+};
+
+const getGradientClasses = (color: string) => {
+  const gradientMap = {
+    scarlet: 'bg-gradient-scarlet',
+    azure: 'bg-gradient-azure',
+    golden: 'bg-gradient-golden',
+    emerald: 'bg-gradient-emerald',
+  };
+  return gradientMap[color as keyof typeof gradientMap] || gradientMap.scarlet;
 };
 
 const StatsCards: React.FC = () => {
@@ -52,11 +62,12 @@ const StatsCards: React.FC = () => {
       {stats.map((stat) => {
         const Icon = stat.icon;
         const iconColorClasses = getColorClasses(stat.color);
+        const gradientClasses = getGradientClasses(stat.color);
         
         return (
           <div
             key={stat.name}
-            className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 hover:shadow-md transition-shadow duration-200 touch-manipulation"
+            className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 hover:shadow-lg transition-all duration-200 touch-manipulation group"
           >
             <div className="flex items-center justify-between">
               <div className="flex-1 min-w-0">
@@ -66,8 +77,8 @@ const StatsCards: React.FC = () => {
                   <span
                     className={`text-xs font-medium px-2 py-1 rounded-full ${
                       stat.changeType === 'positive'
-                        ? 'bg-success-100 text-success-800'
-                        : 'bg-error-100 text-error-800'
+                        ? 'bg-emerald-100 text-emerald-800'
+                        : 'bg-scarlet-100 text-scarlet-800'
                     }`}
                   >
                     {stat.change}
@@ -75,7 +86,7 @@ const StatsCards: React.FC = () => {
                   <span className="text-xs text-gray-500 ml-2 hidden sm:inline">vs last month</span>
                 </div>
               </div>
-              <div className={`p-2 sm:p-3 rounded-lg ${iconColorClasses} ml-2`}>
+              <div className={`p-2 sm:p-3 rounded-lg ${iconColorClasses} ml-2 group-hover:${gradientClasses} group-hover:text-white transition-all duration-200`}>
                 <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
             </div>

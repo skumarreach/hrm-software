@@ -17,7 +17,7 @@ const Employees: React.FC = () => {
           <p className="mt-2 text-gray-600 text-sm sm:text-base">Manage your team members and their information</p>
         </div>
         <div className="flex justify-end">
-          <button className="inline-flex items-center px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700 transition-colors duration-200 touch-manipulation">
+          <button className="inline-flex items-center px-4 py-2 bg-gradient-scarlet text-white text-sm font-medium rounded-lg hover:shadow-lg transition-all duration-200 touch-manipulation">
             <Plus className="h-4 w-4 mr-2" />
             Add Employee
           </button>
@@ -37,12 +37,12 @@ const Employees: React.FC = () => {
               placeholder="Search employees..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-base"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-scarlet-500 focus:border-transparent text-base transition-all duration-200"
             />
           </div>
           <button
             onClick={() => setFilterOpen(!filterOpen)}
-            className="inline-flex items-center px-4 py-3 border border-gray-300 text-gray-700 bg-white rounded-lg hover:bg-gray-50 transition-colors duration-200 touch-manipulation"
+            className="inline-flex items-center px-4 py-3 border border-gray-300 text-gray-700 bg-white rounded-lg hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-50/50 transition-all duration-200 touch-manipulation"
           >
             <Filter className="h-4 w-4 mr-2" />
             Filters

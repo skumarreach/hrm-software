@@ -69,14 +69,14 @@ const SidebarContent: React.FC<{ location: any; onClose?: () => void }> = ({ loc
   return (
     <div className="flex flex-col h-full">
       {/* Logo */}
-      <div className="flex items-center h-16 px-6 border-b border-gray-200">
+      <div className="flex items-center h-16 px-6 border-b border-gray-200 bg-gradient-macaw">
         <div className="flex items-center space-x-3">
-          <div className="h-8 w-8 bg-primary-600 rounded-lg flex items-center justify-center">
-            <Building2 className="h-5 w-5 text-white" />
+          <div className="h-8 w-8 bg-white rounded-lg flex items-center justify-center shadow-lg">
+            <Building2 className="h-5 w-5 text-scarlet-600" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-gray-900">NextHr</h1>
-            <p className="text-xs text-gray-500">HR Management</p>
+            <h1 className="text-xl font-bold text-white">NextHr</h1>
+            <p className="text-xs text-white/80">HR Management</p>
           </div>
         </div>
       </div>
@@ -94,11 +94,11 @@ const SidebarContent: React.FC<{ location: any; onClose?: () => void }> = ({ loc
               onClick={onClose}
               className={`flex items-center px-3 py-3 text-sm font-medium rounded-lg transition-all duration-200 touch-manipulation ${
                 isActive
-                  ? 'bg-primary-50 text-primary-700 border-r-2 border-primary-600'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50 active:bg-gray-100'
+                  ? 'bg-gradient-scarlet text-white shadow-lg'
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gradient-to-r hover:from-scarlet-50 hover:to-azure-50 active:bg-gray-100'
               }`}
             >
-              <Icon className={`mr-3 h-5 w-5 ${isActive ? 'text-primary-600' : 'text-gray-400'}`} />
+              <Icon className={`mr-3 h-5 w-5 ${isActive ? 'text-white' : 'text-gray-400'}`} />
               {item.name}
             </Link>
           );
@@ -107,8 +107,8 @@ const SidebarContent: React.FC<{ location: any; onClose?: () => void }> = ({ loc
 
       {/* Footer */}
       <div className="p-4 border-t border-gray-200">
-        <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg touch-manipulation">
-          <div className="h-10 w-10 bg-primary-500 rounded-full flex items-center justify-center">
+        <div className="flex items-center space-x-3 p-3 bg-gradient-to-r from-emerald-50 to-golden-50 rounded-lg touch-manipulation">
+          <div className="h-10 w-10 bg-gradient-scarlet rounded-full flex items-center justify-center shadow-md">
             <span className="text-sm font-semibold text-white">SJ</span>
           </div>
           <div className="flex-1 min-w-0">

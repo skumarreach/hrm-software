@@ -89,9 +89,9 @@ interface EmployeeListProps {
 
 const getStatusColor = (status: string) => {
   const colors = {
-    Active: 'bg-success-100 text-success-800',
-    'On Leave': 'bg-warning-100 text-warning-800',
-    Remote: 'bg-primary-100 text-primary-800',
+    Active: 'bg-emerald-100 text-emerald-800',
+    'On Leave': 'bg-golden-100 text-golden-800',
+    Remote: 'bg-azure-100 text-azure-800',
   };
   return colors[status as keyof typeof colors] || colors.Active;
 };
@@ -105,7 +105,7 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ searchTerm }) => {
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-      <div className="px-4 sm:px-6 py-4 border-b border-gray-200">
+      <div className="px-4 sm:px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-gray-50/50">
         <h2 className="text-lg font-semibold text-gray-900">
           Employee Directory ({filteredEmployees.length})
         </h2>
@@ -113,10 +113,10 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ searchTerm }) => {
 
       <div className="divide-y divide-gray-200">
         {filteredEmployees.map((employee) => (
-          <div key={employee.id} className="p-4 sm:p-6 hover:bg-gray-50 transition-colors duration-200 touch-manipulation">
+          <div key={employee.id} className="p-4 sm:p-6 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-50/30 transition-all duration-200 touch-manipulation group">
             <div className="flex items-start space-x-4">
               {/* Avatar */}
-              <div className="h-12 w-12 bg-primary-500 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="h-12 w-12 bg-gradient-scarlet rounded-full flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-110 transition-transform duration-200">
                 <span className="text-white font-semibold">{employee.avatar}</span>
               </div>
 
@@ -135,22 +135,22 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ searchTerm }) => {
                     {/* Contact Info - Stacked on mobile */}
                     <div className="space-y-2 sm:space-y-1">
                       <div className="flex items-center text-sm text-gray-500">
-                        <Mail className="h-4 w-4 mr-2 flex-shrink-0" />
+                        <Mail className="h-4 w-4 mr-2 flex-shrink-0 text-azure-500" />
                         <span className="truncate">{employee.email}</span>
                       </div>
                       <div className="flex items-center text-sm text-gray-500">
-                        <Phone className="h-4 w-4 mr-2 flex-shrink-0" />
+                        <Phone className="h-4 w-4 mr-2 flex-shrink-0 text-emerald-500" />
                         <span>{employee.phone}</span>
                       </div>
                       <div className="flex items-center text-sm text-gray-500">
-                        <MapPin className="h-4 w-4 mr-2 flex-shrink-0" />
+                        <MapPin className="h-4 w-4 mr-2 flex-shrink-0 text-golden-500" />
                         <span>{employee.location}</span>
                       </div>
                     </div>
 
                     <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 mt-3 space-y-2 sm:space-y-0">
                       <div className="flex items-center">
-                        <Star className="h-4 w-4 text-yellow-400 mr-1" />
+                        <Star className="h-4 w-4 text-golden-400 mr-1" />
                         <span className="text-sm text-gray-600">{employee.rating}</span>
                       </div>
                       <span className="text-sm text-gray-500">
@@ -161,10 +161,10 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ searchTerm }) => {
 
                   {/* Actions */}
                   <div className="flex items-center space-x-2 mt-4 sm:mt-0 sm:ml-4">
-                    <button className="flex-1 sm:flex-none px-4 py-2 text-sm font-medium text-primary-600 bg-primary-50 rounded-lg hover:bg-primary-100 transition-colors duration-200 touch-manipulation">
+                    <button className="flex-1 sm:flex-none px-4 py-2 text-sm font-medium text-white bg-gradient-scarlet rounded-lg hover:shadow-lg transition-all duration-200 touch-manipulation">
                       View Profile
                     </button>
-                    <button className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors duration-200 touch-manipulation">
+                    <button className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gradient-to-r hover:from-gray-100 hover:to-gray-100/50 transition-all duration-200 touch-manipulation">
                       <MoreHorizontal className="h-5 w-5" />
                     </button>
                   </div>

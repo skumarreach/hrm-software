@@ -16,6 +16,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    background: linear-gradient(135deg, #fef2f2 0%, #f0f9ff 50%, #ecfdf5 100%);
+    min-height: 100vh;
   }
 
   /* Prevent zoom on input focus on iOS */
@@ -33,6 +35,24 @@
   /* Safe area handling for devices with notches */
   .safe-area-pb {
     padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Custom scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #ef4444, #3b82f6);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #dc2626, #2563eb);
   }
 }
 
@@ -86,4 +106,44 @@
   .py-mobile {
     @apply py-4 sm:py-6;
   }
+
+  /* Macaw-inspired gradient utilities */
+  .gradient-text-macaw {
+    background: linear-gradient(135deg, #ef4444 0%, #3b82f6 50%, #10b981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Enhanced shadow utilities */
+  .shadow-macaw {
+    box-shadow: 0 10px 25px -3px rgba(239, 68, 68, 0.1), 0 4px 6px -2px rgba(59, 130, 246, 0.05);
+  }
+
+  .shadow-macaw-lg {
+    box-shadow: 0 20px 25px -5px rgba(239, 68, 68, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.04);
+  }
+}
+
+/* Custom animations for macaw theme */
+@keyframes macaw-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.animate-macaw-pulse {
+  animation: macaw-pulse 2s ease-in-out infinite;
+}
+
+/* Glassmorphism effect */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
