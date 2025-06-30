@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, 
@@ -30,44 +30,61 @@ const navigation = [
 
 const Sidebar: React.FC<SidebarProps> = ({ mobile = false, open = false, onClose }) => {
   const location = useLocation();
-
-  // Close sidebar when route changes on mobile
-  useEffect(() => {
-    if (mobile && open && onClose) {
-      onClose();
-    }
-  }, [location.pathname, mobile, open, onClose]);
+  const sidebarRef = useRef<HTMLDivElement>(null);
 
   // Prevent body scroll when mobile sidebar is open
   useEffect(() => {
     if (mobile && open) {
       document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
     }
 
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
     };
   }, [mobile, open]);
 
+  // Handle backdrop click
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget && onClose) {
+      onClose();
+    }
+  };
+
+  // Handle close button click
+  const handleCloseClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (onClose) {
+      onClose();
+    }
+  };
+
   if (mobile) {
-    console.log('Mobile sidebar render - open:', open); // Debug log
+    console.log('Mobile sidebar render - open:', open);
+    
+    if (!open) return null;
     
     return (
-      <>
+      <div className="fixed inset-0 z-50 xl:hidden">
         {/* Backdrop */}
-        {open && (
-          <div 
-            className="fixed inset-0 z-40 bg-gray-900 bg-opacity-50 transition-opacity xl:hidden" 
-            onClick={onClose}
-            style={{ touchAction: 'none' }} // Prevent scroll on backdrop
-          />
-        )}
+        <div 
+          className="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity duration-300" 
+          onClick={handleBackdropClick}
+          style={{ touchAction: 'none' }}
+        />
         
         {/* Mobile Sidebar */}
         <div 
-          className={`fixed inset-y-0 left-0 z-50 w-80 max-w-sm bg-white transform transition-transform duration-300 ease-in-out xl:hidden shadow-2xl ${
+          ref={sidebarRef}
+          className={`fixed inset-y-0 left-0 w-80 max-w-sm bg-white transform transition-transform duration-300 ease-in-out shadow-2xl ${
             open ? 'translate-x-0' : '-translate-x-full'
           }`}
           style={{ 
@@ -79,9 +96,10 @@ const Sidebar: React.FC<SidebarProps> = ({ mobile = false, open = false, onClose
           <div className="absolute top-4 right-4 z-10">
             <button
               type="button"
-              onClick={onClose}
+              onClick={handleCloseClick}
               className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-scarlet-500 touch-manipulation active:bg-gray-300"
               aria-label="Close menu"
+              style={{ minWidth: '44px', minHeight: '44px' }}
             >
               <X className="h-5 w-5" />
             </button>
@@ -89,7 +107,7 @@ const Sidebar: React.FC<SidebarProps> = ({ mobile = false, open = false, onClose
           
           <SidebarContent location={location} onClose={onClose} />
         </div>
-      </>
+      </div>
     );
   }
 
@@ -103,12 +121,12 @@ const Sidebar: React.FC<SidebarProps> = ({ mobile = false, open = false, onClose
 
 const SidebarContent: React.FC<{ location: any; onClose?: () => void }> = ({ location, onClose }) => {
   const handleLinkClick = (e: React.MouseEvent) => {
-    // Small delay to allow for visual feedback before closing
-    setTimeout(() => {
-      if (onClose) {
+    // Add a small delay to allow for visual feedback before closing
+    if (onClose) {
+      setTimeout(() => {
         onClose();
-      }
-    }, 100);
+      }, 150);
+    }
   };
 
   return (
@@ -142,6 +160,7 @@ const SidebarContent: React.FC<{ location: any; onClose?: () => void }> = ({ loc
                   ? 'bg-gradient-scarlet text-white shadow-lg'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gradient-to-r hover:from-scarlet-50 hover:to-azure-50 active:bg-gray-100'
               }`}
+              style={{ minHeight: '44px' }}
             >
               <Icon className={`mr-3 h-5 w-5 ${isActive ? 'text-white' : 'text-gray-400'}`} />
               <span className="truncate">{item.name}</span>

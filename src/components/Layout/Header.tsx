@@ -9,7 +9,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
   const handleMenuClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('Header menu button clicked'); // Debug log
+    console.log('Header menu button clicked');
     onMenuClick();
   };
 
@@ -23,8 +23,9 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
             <button
               type="button"
               onClick={handleMenuClick}
-              className="xl:hidden p-3 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gradient-to-r hover:from-scarlet-50 hover:to-azure-50 transition-all duration-200 touch-manipulation active:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-scarlet-500"
+              className="xl:hidden p-3 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gradient-to-r hover:from-scarlet-50 hover:to-azure-50 transition-all duration-200 touch-manipulation active:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-scarlet-500 focus:ring-offset-2"
               aria-label="Open menu"
+              style={{ minWidth: '44px', minHeight: '44px' }}
             >
               <Menu className="h-6 w-6" />
             </button>

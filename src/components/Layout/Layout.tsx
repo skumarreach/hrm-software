@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -11,15 +11,22 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
 
-  const handleMenuClick = () => {
-    console.log('Menu clicked, current state:', sidebarOpen); // Debug log
-    setSidebarOpen(true);
-  };
+  const handleMenuClick = useCallback(() => {
+    console.log('Menu clicked, current state:', sidebarOpen);
+    setSidebarOpen(prev => !prev);
+  }, [sidebarOpen]);
 
-  const handleSidebarClose = () => {
-    console.log('Sidebar closing'); // Debug log
+  const handleSidebarClose = useCallback(() => {
+    console.log('Sidebar closing');
     setSidebarOpen(false);
-  };
+  }, []);
+
+  // Close sidebar when route changes
+  React.useEffect(() => {
+    if (sidebarOpen) {
+      setSidebarOpen(false);
+    }
+  }, [location.pathname]);
 
   return (
     <div className="min-h-screen bg-gray-50">
