@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: '/',
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
@@ -11,28 +12,23 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 5173,
     strictPort: true,
-    historyApiFallback: {
-      index: '/index.html',
-      rewrites: [
-        { from: /^\/(?!api).*$/, to: '/index.html' }
-      ]
-    }
   },
   preview: {
     host: '0.0.0.0',
     port: 4173,
     strictPort: true,
-    historyApiFallback: {
-      index: '/index.html',
-      rewrites: [
-        { from: /^\/(?!api).*$/, to: '/index.html' }
-      ]
-    }
   },
   build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false,
     rollupOptions: {
       output: {
-        manualChunks: undefined,
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+          icons: ['lucide-react']
+        },
       },
     },
   },

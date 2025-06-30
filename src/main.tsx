@@ -4,8 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 import './index.css';
 
-// Get the base URL from environment or default to root
-const basename = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+// Ensure proper base URL handling
+const basename = import.meta.env.DEV ? '' : '';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
